@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Jikji Type</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gugi&family=Gowun+Batang&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Gowun Batang', serif;
+      background-color: #f9f5ec;
+      background-image: url('Han.jpg'); 
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      color: #2c2c2c;
+      padding: 40px;
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-family: 'Gugi', cursive;
+      font-size: 2em;
+      color: #5b3924;
+      margin-top: 100px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    /* ✅ 로고 위치 및 크기 */
+    .site-logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 10;
+    }
+
+    .site-logo img {
+      height: 100px;
+      width: auto;
+    }
+
+    /* ✅ 국기 이모지 버튼 스타일 */
+    .lang-toggle {
+      font-size: 1.6rem;         /* 폰트 크기로 이모지 크기 제어 */
+      padding: 10px 16px;
+      border: none;
+      border-radius: 12px;
+      background-color: #6b4a2f;
+      color: white;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .lang-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .result-box {
+      border: 2px solid #bfa78a;
+      border-radius: 20px;
+      padding: 30px;
+      background: #fffdf7;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .mbti {
+      font-size: 2em;
+      color: #7a5033;
+      margin-bottom: 10px;
+    }
+
+    .desc {
+      font-size: 1.1em;
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 로고 -->
+  <div class="site-logo">
+    <img src="Logo.png" alt="Team Logo">
+  </div>
+
+  <h1>📜 What is your Jikji Type?</h1>
+
+  <!-- ✅ 이모지 국기 토글 버튼 -->
+  <div style="text-align: right; margin-bottom: 10px;">
+    <button class="lang-toggle" onclick="setLanguage('en')">🇺🇸</button>
+    <button class="lang-toggle" onclick="setLanguage('ko')">🇰🇷</button>
+  </div>
+
+  <div class="result-box">
+    <div class="mbti" id="mbti"></div>
+    <div class="desc" id="desc"></div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const mbti = urlParams.get("mbti");
+    document.getElementById("mbti").innerText = mbti;
+
+    const descriptions = {
+      ISTJ: {
+        ko: "📘 조용한 원칙형 활자 – 신중하고 책임감 있는 인쇄 장인",
+        en: "📘 The Dutiful Type – A principled craftsman who preserves the legacy of printing with precision."
+      },
+      ISFJ: {
+        ko: "🧵 세심한 수호형 활자 – 지식의 전통을 정성껏 지켜내는 보관자",
+        en: "🧵 The Gentle Guardian – A quiet keeper who carefully protects the values behind movable type."
+      },
+      INFJ: {
+        ko: "🪶 통찰의 인쇄가 – 세상의 의미를 인쇄로 담아내는 사색가",
+        en: "🪶 The Insightful Printer – A deep thinker who prints meaning beyond the text."
+      },
+      INTJ: {
+        ko: "📐 전략형 활자 – 인쇄 공정을 혁신할 계획가",
+        en: "📐 The Strategic Typesetter – An innovator who restructures the entire printing process logically."
+      },
+      ISTP: {
+        ko: "🔧 실용적 제작형 활자 – 직접 활자를 깎고 실험하는 장인",
+        en: "🔧 The Practical Maker – A hands-on artisan who experiments with type and form."
+      },
+      ISFP: {
+        ko: "🎨 감성형 활자 – 아름다운 문장으로 감동을 인쇄하는 예술가",
+        en: "🎨 The Emotional Engraver – An artist who prints heartfelt beauty through graceful layouts."
+      },
+      INFP: {
+        ko: "📖 이상주의 활자 – 직지를 통해 세상에 메시지를 전하고 싶은 철학자",
+        en: "📖 The Idealistic Imprinter – A dreamer who seeks to express values through the Jikji's message."
+      },
+      INTP: {
+        ko: "🧠 탐구형 활자 – 논리로 직지를 해석하는 학문 중심 지식인",
+        en: "🧠 The Analytical Scribe – A thinker who deciphers the logic behind ancient printing systems."
+      },
+      ESTP: {
+        ko: "⚙️ 액션형 활자 – 바로 인쇄부터 시작하는 실행가",
+        en: "⚙️ The Bold Operator – A doer who jumps right into the press with quick decision-making."
+      },
+      ESFP: {
+        ko: "🌟 흥겨운 표현형 활자 – 활자를 무대처럼 즐기는 창의적 전달자",
+        en: "🌟 The Expressive Mover – A vibrant storyteller who brings printing to life like a performance."
+      },
+      ENFP: {
+        ko: "🔥 영감의 전파자 – 직지에 열정을 불어넣는 활력 넘치는 이야기꾼",
+        en: "🔥 The Inspired Spreader – A passionate spirit who wants the Jikji’s message to reach the world."
+      },
+      ENTP: {
+        ko: "🛠️ 창의 발명형 활자 – 전통 인쇄를 새롭게 정의하는 아이디어 뱅크",
+        en: "🛠️ The Creative Disruptor – A playful inventor who reinvents printing with bold ideas."
+      },
+      ESTJ: {
+        ko: "🏛️ 체계적 관리형 활자 – 인쇄소를 책임지는 리더형 제작자",
+        en: "🏛️ The Structured Manager – A reliable leader who organizes printing projects with order."
+      },
+      ESFJ: {
+        ko: "💌 따뜻한 조화형 활자 – 모두를 위한 책을 만드는 마음 전달자",
+        en: "💌 The Harmonious Communicator – A kind-hearted publisher who prints for connection and community."
+      },
+      ENFJ: {
+        ko: "🎓 비전형 활자 – 직지의 가치를 전 세계로 전파하려는 인문 리더",
+        en: "🎓 The Visionary Educator – A charismatic figure who shares the wisdom of Jikji across cultures."
+      },
+      ENTJ: {
+        ko: "📊 추진형 리더 활자 – 대규모 인쇄 프로젝트를 주도하는 혁신가",
+        en: "📊 The Executive Innovator – A powerful reformer who scales ancient printing to modern impact."
+      }
+    };
+
+    let currentLang = "en";
+
+    function renderDescription() {
+      const desc = descriptions[mbti];
+      if (desc) {
+        document.getElementById("desc").innerText = desc[currentLang];
+      } else {
+        document.getElementById("desc").innerText = "🕵️ Unknown type. A new kind of typeface has been discovered!";
+      }
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      renderDescription();
+    }
+
+    renderDescription();
+  </script>
+
+</body>
+</html>
