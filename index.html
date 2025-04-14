@@ -1,1 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jikji MBTI Test</title>
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&family=Gugi&display=swap" rel="stylesheet">
+
+  <!-- CSS Style -->
+  <style>
+    body {
+      font-family: 'Gowun Batang', serif;
+      background-color: #f9f5ec;
+      background-image: url('Han.jpg'); 
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    
+      color: #2c2c2c;
+      padding: 40px;
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      font-family: "Gugi", cursive;
+      font-size: 2em;
+      color: #5b3924;
+      margin-top: 100px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .site-logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 10;
+    }
+    .site-logo img {
+      height: 100px;
+      width: auto;
+    }
+    .lang-toggle {
+      font-size: 1.6rem;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 12px;
+      background-color: #6b4a2f;
+      color: white;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .lang-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    form {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 20px;
+      }
+    form p {
+      font-weight: bold;
+      margin-top: 25px;
+      margin-bottom: 10px;
+    }
+    label {
+      display: block;
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      background-color: #fff;
+      transition: all 0.2s ease;
+    }
+    label:hover {
+      background-color: #f0e6d6;
+    }
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+    button {
+      margin-top: 30px;
+      background-color: #5b3924;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #7a5033;
+    }
+  </style>
+</head>
+<body>
+<!-- Logo -->
+  <div class="site-logo">
+    <img src="Logo.png" alt="Team Logo">
+  </div>
+  
+  <h1>📜 What is your Jikji Type?</h1>
+
+  <div style="text-align: right; margin-bottom: 10px;">
+    <button class="lang-toggle" onclick="setLanguage('en')">🇺🇸</button>
+    <button class="lang-toggle" onclick="setLanguage('ko')">🇰🇷</button>
+  </div>
+
+  <form id="mbti-form">
+    <!-- Question 1 -->
+    <p><span class="q" data-en="1. When I come up with a new idea, I" data-ko="1. 새로운 아이디어가 떠오르면 나는"></span></p>
+    <label><input type="radio" name="q1" value="E" required>
+        <span class="a" data-en="I immediately share it with my colleagues." data-ko="바로 동료들과 공유한다."></span>
+    </label>
+    <label><input type="radio" name="q1" value="I">
+        <span class="a" data-en="I organize myself and dig deeper." data-ko="혼자 정리하고 깊이 파고든다."></span>
+    </label>
+
+    <!-- Question 2 -->
+    <p><span class="q" data-en="2. When I see how metal types are made, I" data-ko="2. 금속활자 제작 과정을 보면 나는"></span></p>
+    <label><input type="radio" name="q2" value="S" required>
+        <span class="a" data-en="Admire the manual crafting skills." data-ko="손으로 만드는 기술에 감탄한다."></span>
+    </label>
+    <label><input type="radio" name="q2" value="N">
+        <span class="a" data-en="Feel more inspired by the symbolism of spreading knowledge." data-ko="지식이 퍼지는 상징성에 감동한다."></span>
+    </label>
+
+    <!-- Question 3 -->
+    <p><span class="q" data-en="3. If I were making Jikji, I would" data-ko="3. 내가 직지를 만든다면 나는"></span></p>
+    <label><input type="radio" name="q3" value="T" required>
+        <span class="a" data-en="Find the most efficient way to arrange the type." data-ko="가장 효율적인 활자 배열 방식을 찾는다."></span>
+    </label>
+    <label><input type="radio" name="q3" value="F">
+         <span class="a" data-en="Focus more on the emotional impression it gives people." data-ko="사람들에게 줄 감정적 인상에 더 집중한다."></span>
+    </label>
+
+    <!-- Question 4 -->
+    <p><span class="q" data-en="4. When deciding the printing order, I" data-ko="4. 인쇄 순서를 정할 때 나는"></span></p>
+    <label><input type="radio" name="q4" value="J" required>
+        <span class="a" data-en="Stick to a pre-set plan." data-ko="미리 세운 계획대로 진행한다."></span>
+    </label>
+    <label><input type="radio" name="q4" value="P">
+        <span class="a" data-en="Adapt flexibly depending on the situation." data-ko="상황에 따라 유동적으로 바꾼다."></span>
+    </label>
+    <br><br>
+    <button type="submit">Check the results</button>
+  </form>
+
+  <!-- JavaScript Code -->
+  <script>
+    // ✅ Go to Result Page
+    document.getElementById("mbti-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+  
+      const answers = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+      const formData = new FormData(this);
+  
+      for (let [_, value] of formData.entries()) {
+        answers[value]++;
+      }
+  
+      const result =
+        (answers.E >= answers.I ? "E" : "I") +
+        (answers.S >= answers.N ? "S" : "N") +
+        (answers.T >= answers.F ? "T" : "F") +
+        (answers.J >= answers.P ? "J" : "P");
+  
+      window.location.href = `result.html?mbti=${result}`;
+    });
+  
+    // ✅ Change Language
+    let currentLang = "en"; // Current Language
+  
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.querySelectorAll(".q").forEach(el => {
+        el.innerText = el.dataset[lang];
+      });
+      document.querySelectorAll(".a").forEach(el => {
+        el.innerText = el.dataset[lang];
+      });
+    }
+  
+    // ✅ 페이지 로드시 초기 텍스트 표시
+    window.onload = () => {
+      setLanguage(currentLang);
+    };
+  </script>
+  
+</body>
+</html>
